@@ -7,4 +7,4 @@
 * filters
 * computed properties 
 
-Live versions here [https://github.com/claraj/vue-week-1-examples-composition](https://github.com/claraj/vue-week-1-examples-composition)
+Live versions here [https://claraj.github.io/vue-week-1-examples-composition](https://claraj.github.io/vue-week-1-examples-composition)
