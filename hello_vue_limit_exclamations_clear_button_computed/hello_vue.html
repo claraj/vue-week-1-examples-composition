@@ -26,15 +26,15 @@
     createApp({
         setup() {
 
-            const originalMessage = 'hi'   // Not reactve 
+            const originalMessage = ref('hi') 
 
             const numberOfExclamationPoints = ref(0)
 
             function addExclamation() {
-                if (numberOfExclamationPoints.value > 10) {
-                    alert('No more exclamation points!')
-                } else {
+                if (numberOfExclamationPoints.value < 10) {
                     numberOfExclamationPoints.value++ 
+                } else {
+                    alert('No more exclamation points!')
                 }
             }
 
@@ -43,7 +43,7 @@
             }
 
             const messageWithExclamationPoints = computed( function() {
-                let computedMessage = originalMessage
+                let computedMessage = originalMessage.value
 
                 for (let x = 0; x < numberOfExclamationPoints.value; x++) {
                     computedMessage = computedMessage + '!'
@@ -53,6 +53,7 @@
 
             return {
                 // refs - reactive data
+                originalMessage,
                 numberOfExclamationPoints,
 
                 // Computed properties

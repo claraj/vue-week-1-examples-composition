@@ -29,11 +29,11 @@
                 const numberOfExclamationPoints = ref(0)
 
                 function addExclamation() {
-                    if (numberOfExclamationPoints.value > 10) {
-                        alert('No more exclamation points!')
-                    } else {
+                    if (numberOfExclamationPoints.value < 10) {
                         message.value = message.value + '!'
                         numberOfExclamationPoints.value++ 
+                    } else {
+                        alert('No more exclamation points!')
                     }
                 }
 
