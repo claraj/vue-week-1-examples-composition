@@ -16,15 +16,18 @@
 
     <script>
 
-        let app = Vue.createApp({
-            data() {
-                return {
-                    taskList: ['Water plants', 'Feed cat', 'Do taxes']   
-                }
-            }
-        })
+        const { createApp, ref } = Vue 
 
-        app.mount('#app')
+        createApp({
+            setup() {
+
+                const taskList = ref(['Water plants', 'Pay cell phone bill', 'Feed cat'])   
+
+                return {
+                    taskList,
+                }  
+            }
+        }).mount('#app')
 
     </script>
 

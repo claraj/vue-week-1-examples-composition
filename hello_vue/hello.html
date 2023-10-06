@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Hello Vue</title>
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
 <body>
@@ -16,15 +16,21 @@
 
     <script>
 
-        let app = Vue.createApp({
-            data() {
-                return {
-                    message: 'hi',
-                }
-            }
-        })
+        const { createApp, ref } = Vue 
 
-        app.mount('#app')
+        createApp({
+            setup() {
+
+                // To access refs in a component's template, declare and 
+                // return them from a component's setup() function (Vue docs)
+
+                const message = ref('hi')
+
+                return {
+                    message   // note object shorthand
+                }  
+            }
+        }).mount('#app')
 
     </script>
 

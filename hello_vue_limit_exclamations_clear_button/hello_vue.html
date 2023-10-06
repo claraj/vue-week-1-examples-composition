@@ -1,6 +1,13 @@
-<script src="https://unpkg.com/vue@next"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
 
-<div id="app">
+<body>
+
+    <div id="app">
 
     <h1>Hello Vue</h1>
 
@@ -8,36 +15,46 @@
 
     <button v-on:click="addExclamation">Add !</button>
 
-    <button v-on:click="clear">Clear Exclamation Points</button>
+    <button v-on:click="clearExclamations">Clear Exclamation Points</button>
 
 </div>
 
 <script>
 
-    let app = Vue.createApp({
-        el: '#app',
-        data() {
-            return {
-                message: 'hi',
-                numberOfExclamationPoints: 0
-            }
-        },
-        methods: {
-            addExclamation() {
-                if (this.numberOfExclamationPoints < 10) {
-                    this.message = this.message + '!'
-                    this.numberOfExclamationPoints++
-                } else {
-                    alert('No more exclamation points!!!')
-                }
-            },
-            clear() {
-                this.message = 'hi'
-                this.numberOfExclamationPoints = 1
-            }
-        },
-    })
+    const { createApp, ref } = Vue 
 
-    app.mount('#app')
+    createApp({
+        setup() {
+            const message = ref('hi')
+            const numberOfExclamationPoints = ref(0)
+
+            function addExclamation() {
+                if (numberOfExclamationPoints.value > 10) {
+                    alert('No more exclamation points!')
+                } else {
+                    message.value = message.value + '!'
+                    numberOfExclamationPoints.value++ 
+                }
+            }
+
+            function clearExclamations() {
+                numberOfExclamationPoints.value = 0
+                message.value = 'hi'
+            }
+
+            return {
+                // refs - reactive data
+                message, 
+                numberOfExclamationPoints,
+
+                // function definitions 
+                addExclamation,
+                clearExclamations
+            }
+        }
+    }).mount('#app')
 
 </script>
+
+</body>
+</html>

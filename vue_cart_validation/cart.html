@@ -38,7 +38,6 @@
                     <div class="error-message" v-if="quantityError">{{ quantityError }}</div>
                 </td>
                 <td> 
-                    <!-- Only display total if there is no error -->
                     <div v-if="quantityError">
                         Invalid quantity
                     </div>
@@ -53,41 +52,58 @@
 
 <script>
 
-    let app = Vue.createApp({
-        data() {
-            return {
-                name: 'Hat',
-                quantity: 1,
-                unitPrice: 4.99,
-                maxQuantity: 20,
-                quantityError: ''
-            }
-        },
-        computed: {
-            total() {
-                // set an error message if the new value of quantity is not valid 
-                if (!Number.isInteger(this.quantity)) { 
-                    this.quantityError = 'Quantity must be a number'
+
+const { createApp, ref, computed } = Vue 
+
+createApp({
+    setup() {
+
+        const name = ref('Hat')  
+        const quantity = ref(1)
+        const unitPrice = ref(4.99) 
+
+        const maxQuantity = 10
+
+        const quantityError = computed( () => {
+
+            if (!Number.isInteger(quantity.value)) { 
+                    return 'Quantity must be a number'
                 }
                 
-                else if (this.quantity < 0 || this.quantity > this.maxQuantity) {
-                    this.quantityError = 'Quantity must be between 0 and 20' 
+                else if (quantity.value < 0 || quantity.value > maxQuantity) {
+                    return `Quantity must be between 0 and ${maxQuantity}`
                 }
 
                  // Clear error if quantity is valid                     
+                 
                 else {
-                    this.quantityError = ''   
-                    
-                    // Compute price 
-                    let totalPrice = this.quantity * this.unitPrice
-                    let formattedPrice = totalPrice.toFixed(2)
-                    return formattedPrice
+                    return ''  // Could also return undefined or null       
                 }
-            }
-        }
-    })
 
-    app.mount('#app')
+        })
+
+        const total = computed( () => {
+            const totalPrice = quantity.value * unitPrice.value
+            const formattedPrice = totalPrice.toFixed(2)
+            return formattedPrice
+        })
+
+        return {
+
+            // Reactive properties 
+            name,
+            quantity,
+            unitPrice,
+
+            // Computed properties 
+            total,
+            quantityError
+        }  
+    }
+}).mount('#app')
+
+
+
 
 </script>
 

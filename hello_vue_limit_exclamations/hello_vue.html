@@ -1,37 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+
     <script src="https://unpkg.com/vue@next"></script>
 
-<div id="app">
+    <div id="app">
 
-    <h1>Hello Vue</h1>
+        <h1>Hello Vue</h1>
 
-    <p>{{ message }}</p>
+        <p>{{ message }}</p>
 
-    <button v-on:click="addExclamation">Add !</button>
+        <button v-on:click="addExclamation">Add !</button>
 
-</div>
+    </div>
 
-<script>
+    <script>
 
-    let app = Vue.createApp({
-        el: '#app',
-        data() {
-            return {
-                message: 'hi',
-                numberOfExclamationPoints: 0
-            }
-        },
-        methods: {
-            addExclamation() {
-                if (this.numberOfExclamationPoints < 10) {
-                    this.message = this.message + '!'
-                    this.numberOfExclamationPoints++
-                } else {
-                    alert('No more exclamation points!!!')
+        const { createApp, ref } = Vue 
+
+        createApp({
+            setup() {
+                const message = ref('hi')
+                const numberOfExclamationPoints = ref(0)
+
+                function addExclamation() {
+                    if (numberOfExclamationPoints.value > 10) {
+                        alert('No more exclamation points!')
+                    } else {
+                        message.value = message.value + '!'
+                        numberOfExclamationPoints.value++ 
+                    }
+                }
+
+                return {
+                    // refs - reactive data
+                    message, 
+                    numberOfExclamationPoints,
+
+                    // function definitions 
+                    addExclamation,
                 }
             }
-        },
-    })
+        }).mount('#app')
 
-    app.mount('#app')
+    </script>
 
-</script>
+</body>
+</html>

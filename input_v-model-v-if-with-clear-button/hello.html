@@ -13,8 +13,11 @@
 
         <div v-if="name">
             <p>Your name is {{ name }}</p>
+            <button v-on:click="clearName">Clear Input</button>
         </div>
-      
+        <div v-else>
+            <p>Awaiting user input.</p> 
+        </div>
     </div>
 
     <script>
@@ -26,8 +29,19 @@
 
                 const name = ref('')  // Empty string 
 
+                function clearName() {
+                    name.value = ''
+                }
+
+                // Equivalent to above function definition 
+
+                // const clearName = () => {
+                //     name.value = ''
+                // }
+
                 return {
-                    name   
+                    name,
+                    clearName
                 }  
             }
         }).mount('#app')
@@ -36,5 +50,4 @@
 
 </body>
 </html>
-
 

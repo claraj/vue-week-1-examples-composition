@@ -9,7 +9,7 @@
     <div id="app">
         <h1>Hello Vue</h1>
         <p>
-            {{ boldMessage }}
+            {{ uppercaseMessage }}
         </p>
 
         <button v-on:click="addExclamation">Add !</button>
@@ -17,25 +17,36 @@
 
     <script>
 
-        let app = Vue.createApp({
-            data() {
+    const { createApp, ref, computed } = Vue 
+
+        createApp({
+            setup() {
+                const message = ref('hi')
+
+                function addExclamation() {
+                    message.value = message.value + '!'
+                }
+
+                // const uppercaseMessage = computed( function() {
+                //     return message.value.toUpperCase()
+                // })
+                
+                const uppercaseMessage = computed( () => {   // Arrow notation - equivalent to above
+                    return message.value.toUpperCase()
+                })
+
                 return {
-                    message: "hi",
-                }
-            },
-            methods: {
-                addExclamation() {
-                    this.message += '!'
-                }
-            },
-            computed: {
-                boldMessage() {
-                    return this.message.toUpperCase()
+                    // refs - reactive data
+                    message, 
+
+                    // function definitions 
+                    addExclamation,
+
+                    // computed properties 
+                    uppercaseMessage
                 }
             }
-        })
-
-        app.mount('#app')
+        }).mount('#app')
 
     </script>
 

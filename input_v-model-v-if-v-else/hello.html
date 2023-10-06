@@ -20,15 +20,18 @@
     </div>
 
     <script>
-        let app = Vue.createApp({
-            data() {
-                return {
-                    name: ''
-                }
-            }
-        })
+        const { createApp, ref } = Vue 
 
-        app.mount('#app')
+        createApp({
+            setup() {
+
+                const name = ref('')  // Empty string 
+
+                return {
+                    name   
+                }  
+            }
+        }).mount('#app')
 
     </script>
 

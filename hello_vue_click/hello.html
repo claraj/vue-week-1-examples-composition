@@ -18,20 +18,25 @@
 
     <script>
 
-        let app = Vue.createApp({
-            data() {
-                return {
-                  message: "hi"
+        const { createApp, ref } = Vue 
+
+        createApp({
+            setup() {
+                const message = ref('hi')
+
+                function addExclamation() {
+                    message.value = message.value + '!'
                 }
-            },
-            methods: {
-                addExclamation() {
-                    this.message = this.message + '!'
+
+                return {
+                    // refs - reactive data
+                    message, 
+
+                    // function definitions 
+                    addExclamation
                 }
             }
-        })
-
-        app.mount('#app')
+        }).mount('#app')
 
     </script>
 

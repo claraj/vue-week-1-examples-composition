@@ -19,6 +19,7 @@
             </li>
         </ul>   
 
+        <button v-on:click="clearList">All done!</button>
     </div>
 
     <script>
@@ -38,13 +39,18 @@
                     }
                 }
 
+                const clearList = () => {
+                    taskList.value = []
+                }
+
                 return {
                     // reactive data
                     taskList,
                     newTask,
 
                     // functions 
-                    addTask
+                    addTask,
+                    clearList
                 }  
             }
         }).mount('#app')
