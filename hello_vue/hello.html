@@ -21,13 +21,10 @@
         createApp({
             setup() {
 
-                // To access refs in a component's template, declare and 
-                // return them from a component's setup() function (Vue docs)
-
                 const message = ref('hi')
 
                 return {
-                    message   // note object shorthand
+                    message  
                 }  
             }
         }).mount('#app')
@@ -36,5 +33,6 @@
 
 </body>
 </html>
+
 
 
